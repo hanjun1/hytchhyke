@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHlfF4Zo27li1lFg-HSdaInVDSDda1ggI&libraries=places"></script>
+    <title>New Ride</title>
+  </head>
+  <body>
+    <div id="test"></div>
+    <form action="/" method="POST">
+      <label for="date">Date: <input type="date" name="date" /> </label><br />
+      <label for="time">Time: <input type="time" name="time" /> </label><br />
+      <label for="price"
+        >Price:
+        <input type="number" step="0.01" min="0.00" name="price" /> </label
+      ><br />
+      <label for="seats"
+        >Seats: <input type="number" step="1" min="0" name="seats" /> </label
+      ><br />
+      <label for="start"
+        >Start Location: <input id="start" type="text" name="start" /></label
+      ><br />
+      <label for="end"
+        >End Location: <input id="end" type="text" name="end" /></label
+      ><br />
+      <button type="button">Create New Trip</button>
+    </form>
+    <script src="javascripts/script.js"></script>
+  </body>
+</html>

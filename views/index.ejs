@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Hitch</title>
   </head>
+  <nav></nav>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <a href="/new">New Ride</a>
+    <p>Search For a Trip...</p>
+    <form action="/" method="GET">
+      <label for="startCity"
+        >From: <br />
+        <input type="text" name="startCity" /> </label
+      ><br />
+      <label for="endCity"
+        >To: <br />
+        <input type="text" name="endCity" /> </label
+      ><br />
+      <label for="date"
+        >Date: <br />
+        <input type="date" name="date" /> </label
+      ><br />
+      <button>Search</button>
+    </form>
   </body>
 </html>

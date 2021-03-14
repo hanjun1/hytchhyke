@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hitch</title>
+  </head>
+  <body>
+    <a href="/new">New Ride</a>
+    <form action="/" method="GET">
+      <label for="startCity"
+        >From: <br />
+        <input type="text" name="startCity" /> </label
+      ><br />
+      <label for="endCity"
+        >To: <br />
+        <input type="text" name="endCity" /> </label
+      ><br />
+      <label for="date"
+        >Date: <br />
+        <input type="date" name="date" /> </label
+      ><br />
+      <button>Search</button>
+    </form>
+    <div class="trips-container">
+      <% if (trips.length !== 0) { %> <% for (let trip of trips) { %>
+      <!-- Think about converting this to a table instead of a div-->
+      <div class="trip-container">
+        <p>Date: <%= trip.date %></p>
+        <p>Time: <%= trip.time %></p>
+        <p>Trip Details: <%= trip.startCity %> ---> <%= trip.endCity %></p>
+        <p>Cost: $<%= trip.price %></p>
+        <a href="/<%= trip.id %>">Trip Details</a>
+      </div>
+      <% } %> <% } else { %>
+      <p>There are no trips available</p>
+      <% } %>
+    </div>
+  </body>
+</html>
