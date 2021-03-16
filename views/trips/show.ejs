@@ -7,15 +7,26 @@
     <title>Hitch</title>
   </head>
   <body>
+    <a href="/">back</a>
     <p>Trip:</p>
     <p><%= trip.startCity %> ---> <%= trip.endCity %></p>
-    <p>Date & Time:</p>
-    <p><%= trip.date %> <%= trip.time %></p>
-    <p>Driver Profile:</p>
-    <p>Available Seats:</p>
-    <p><%= trip.seats %></p>
-    <p>Cost:</p>
-    <p>$<%= trip.price %></p>
+    <p>Date & Time: <%= trip.date %> <%= trip.time %></p>
+    <p>Driver Profile: <%= trip.driver.name %></p>
+    <p>Available Seats: <%= trip.seats %></p>
+    <p>Cost: $<%= trip.price %></p>
     <p>Pick Up Location:</p>
+    <% if (user) { %>
+    <div class="request-form">
+      <form action="/users/<%= user.id %>/requests" method="POST">
+        <input type="hidden" name="trip" value="<%= trip.id %>" />
+        <input type="hidden" name="from" value="<%= user.id %>" />
+        <input type="hidden" name="to" value="<%= trip.driver.id %>" />
+        <input type="hidden" name="status" value="Pending" />
+        <input type="hidden" name="read" value="false" />
+        <textarea name="text" cols="30" rows="10"></textarea><br />
+        <button>Send Request</button>
+      </form>
+    </div>
+    <% }%>
   </body>
 </html>

@@ -17,7 +17,9 @@ const tripSchema = new Schema({
   ],
   seats: Number,
   start: String,
+  startCity: String,
   end: String,
+  endCity: String,
 });
 
 module.exports = mongoose.model("Trip", tripSchema);

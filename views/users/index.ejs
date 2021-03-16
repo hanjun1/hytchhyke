@@ -1,0 +1,13 @@
+<%- include('../partial-user/header') %>
+
+<h1>Hello <%= user.name %>,</h1>
+
+<% if (user.reviews.length > 0) { %> <% user.reviews.forEach((review) => { %>
+<div class="review">
+  <p><%= review.reviewer %></p>
+  <p><%= review.rating %>/5</p>
+  <p><%= reivew.comment %></p>
+</div>
+<% }) %> <% } else { %>
+<p>You have no reviews yet...</p>
+<% } %> <%- include('../partial-user/footer') %>

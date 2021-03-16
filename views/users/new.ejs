@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="test"></div>
-    <form action="/" method="POST">
+    <form action="/users/<%= user.id %>" method="POST">
       <label for="date">Date: <input type="date" name="date" /> </label><br />
       <label for="time">Time: <input type="time" name="time" /> </label><br />
       <label for="price"
@@ -25,8 +25,11 @@
       <label for="end"
         >End Location: <input id="end" type="text" name="end" /></label
       ><br />
+      <input type="hidden" name="startCity" id="startCity" />
+      <input type="hidden" name="endCity" id="endCity" />
+      <input type="hidden" name="driver" value="<%= user.id %>" />
       <button type="button">Create New Trip</button>
     </form>
-    <script src="javascripts/script.js"></script>
+    <script src="../../javascripts/script.js"></script>
   </body>
 </html>

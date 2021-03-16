@@ -1,21 +1,16 @@
 /*-- CONSTANTS --*/
-
 /*-- APP'S STATE (VARIABLES) --*/
 
 let startLoc;
 let endLoc;
 let options = {
+  types: ["(cities)"],
   componentRestrictions: { country: "ca" },
 };
 
 /*-- CACHED ELEMENT REFERENCES --*/
-
-let startLocInput = document.getElementById("start");
-let endLocInput = document.getElementById("end");
-let startCityInput = document.getElementById("startCity");
-let endCityInput = document.getElementById("endCity");
-let buttonEl = document.querySelector("button");
-let newRideForm = document.querySelector("form");
+const startLocInput = document.querySelector(".start");
+const endLocInput = document.querySelector(".end");
 const autocompleteStartLoc = new google.maps.places.Autocomplete(
   startLocInput,
   options
@@ -24,9 +19,12 @@ const autocompleteEndLoc = new google.maps.places.Autocomplete(
   endLocInput,
   options
 );
+const startCityInput = document.querySelector(".start-city");
+const endCityInput = document.querySelector(".end-city");
+const searchForm = document.querySelector("form");
+const buttonEl = document.querySelector("button");
 
 /*-- EVENT LISTENERS --*/
-
 startLocInput.addEventListener("change", resetStartLocation);
 endLocInput.addEventListener("change", resetEndLocation);
 
@@ -51,11 +49,9 @@ autocompleteEndLoc.addListener("place_changed", () => {
 });
 
 buttonEl.addEventListener("click", validateInputs);
-
 /*-- MAIN FUNCTIONS --*/
 
 function validateInputs() {
-  console.log(startLoc);
   if (
     startLoc.hasOwnProperty("place_id") &&
     endLoc.hasOwnProperty("place_id")
@@ -70,7 +66,7 @@ function validateInputs() {
         endCityInput.value = comp.long_name;
       }
     });
-    newRideForm.submit();
+    searchForm.submit();
   }
 }
 
@@ -81,4 +77,3 @@ function resetStartLocation() {
 function resetEndLocation() {
   endLoc = {};
 }
-// when pressing the button, change the input values to stringifed arrays
