@@ -8,7 +8,7 @@
     <title>New Ride</title>
   </head>
   <body>
-    <div id="test"></div>
+    <%- include('../partial/navbar') %>
     <form action="/users/<%= user.id %>" method="POST">
       <label for="date">Date: <input type="date" name="date" /> </label><br />
       <label for="time">Time: <input type="time" name="time" /> </label><br />
@@ -30,6 +30,7 @@
       <input type="hidden" name="driver" value="<%= user.id %>" />
       <button type="button">Create New Trip</button>
     </form>
+    <%- include('../partial/footer') %>
     <script src="../../javascripts/script.js"></script>
   </body>
 </html>

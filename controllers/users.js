@@ -62,7 +62,7 @@ async function showDriverTrips(req, res) {
     trips.sort((a, b) => {
       return b.time.localeCompare(a.time);
     });
-    res.render("users/showtrip", {
+    res.render("users/trips/index", {
       trips,
       user: req.user,
       title: "driver",
@@ -80,7 +80,7 @@ async function showPassengerTrips(req, res) {
     trips.sort((a, b) => {
       return b.time.localeCompare(a.time);
     });
-    res.render("users/showtrip", {
+    res.render("users/trips/index", {
       trips,
       user: req.user,
       title: "passenger",
@@ -101,7 +101,7 @@ async function createRequest(req, res) {
       status: req.body.status,
       timestamp: new Date(),
     });
-    res.render("users/request", {
+    res.render("users/requests/show", {
       user: req.user,
     });
   } catch (e) {
@@ -201,6 +201,9 @@ async function deletePassengerTrip(req, res) {
 
 async function deleteDriverTrip(req, res) {
   try {
+    await Request.findOneAndDelete({
+      trip: req.body.tripId,
+    }).populate("trip");
     await Trip.findByIdAndDelete(req.body.tripId);
     res.redirect(`/users/${req.params.id}/drivertrips`);
   } catch (e) {

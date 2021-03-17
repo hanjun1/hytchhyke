@@ -14,7 +14,6 @@ const fetch = require("node-fetch");
 async function index(req, res) {
   if (Object.keys(req.query).length === 0) {
     res.render("index", {
-      first: true,
       user: req.user,
       name: req.query.name,
     });
@@ -39,8 +38,7 @@ async function index(req, res) {
     //   distance = await calculateDistance(req.query.end, trip.end);
     //   trip.endDistance = distance;
     // }
-    res.render("index", {
-      first: false,
+    res.render("index-search", {
       trips,
       user: req.user,
       name: req.query.name,
@@ -48,8 +46,7 @@ async function index(req, res) {
       searchEnd: req.query.end,
     });
   } catch (e) {
-    console.log(e);
-    res.render("error", { e });
+    res.render("error", { message: "There's an error!", error: e });
   }
 }
 
