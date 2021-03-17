@@ -1,50 +1,51 @@
-<%- include('../../partial-user/header') %>
-
-<div class="radio-container">
-  <div class="message-type-container">
-    <input type="radio" id="driver" name="message-type" checked />
-    <label for="driver">Driver</label><br />
-    <input type="radio" id="passenger" name="message-type" />
-    <label for="passenger">Passenger</label>
-  </div>
-  <div class="filter-container">
-    <input type="radio" id="all" name="filter" checked />
-    <label for="all">All</label>
-    <input type="radio" id="rejected" name="filter" checked />
-    <label for="rejected">Rejected</label>
-    <input type="radio" id="pending" name="filter" checked />
-    <label for="pending">Pending</label>
-    <input type="radio" id="accepted" name="filter" checked />
-    <label for="accepted">Accepted</label>
-  </div>
-</div>
+<%- include('../../partial-user/header') %> <% if (sent === false) { %>
 <div class="driver-requests-container">
-  <% console.log(requestsReceived) %> <% console.log(requestsSent) %> <% if
-  (requestsReceived.length > 0) { %> <% requestsReceived.forEach((request) => {
-  %>
+  <% if(requestsReceived.length > 0) { %> 
+  <% requestsReceived.forEach((request)=> { %>
   <div class="request">
     <p><%= request.timestamp %></p>
-    <p><%= request.trip %></p>
+    <p><%= request.trip.start %> ---> <%= request.trip.end %></p>
     <p><%= request.from.name %></p>
     <p><%= request.text %></p>
+    <% if (request.status === "Pending") { %>
+    <div class="request-button-container">
+      <form action="/users/<%= user.id %>/requests/received?_method=PUT" method="POST">
+        <input type="hidden" name="request" value="<%= request.id %>" />
+        <input type="radio" name="option" value="accept" checked />
+        <label for="accept">Accept</label>
+        <input type="radio" name="option" value="decline" />
+        <label for="decline">Decline</label><br />
+        <button>Confirm</button>
+      </form>
+    </div>
+    <% } else { %>
     <p><%= request.status %></p>
+    <% } %>
   </div>
   <% }); %> <% } else { %>
-  <p>There are no recieved requests.</p>
+  <p>There are no received requests.</p>
   <% } %>
 </div>
+<% } %> <% if (sent === true) { %>
 <div class="passenger-requests-container hidden">
   <% if (requestsSent.length > 0) { %> <% requestsSent.forEach((request) => { %>
   <div class="request">
     <p><%= request.timestamp %></p>
-    <p><%= request.trip %></p>
+    <p><%= request.trip.start %> ---> <%= request.trip.end %></p>
     <p><%= request.to.name %></p>
     <p><%= request.text %></p>
     <p><%= request.status %></p>
+    <% if (request.status === "Pending") { %>
+      <form action="/users/<%= user.id %>/requests/sent?_method=PUT" method="POST">
+        <input type="hidden" name="request" value="<%= request.id %>" />
+        <button>Cancel</button>
+      </form>
+    <% } %> 
   </div>
   <% }); %> <% } else { %>
   <p>There are no sent requests.</p>
   <% } %>
 </div>
+<% } %>
 <script src="../../users/requests/index.js"></script>
 <%- include('../../partial-user/footer') %>

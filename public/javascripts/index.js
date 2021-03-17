@@ -4,7 +4,6 @@
 let startLoc;
 let endLoc;
 let options = {
-  types: ["(cities)"],
   componentRestrictions: { country: "ca" },
 };
 

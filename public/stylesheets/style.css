@@ -1,14 +1,8 @@
-.geocoder {
-  z-index: 1;
-  width: 100%;
-  text-align: center;
-  top: 20px;
+.hidden {
+  display: none;
 }
 
-.mapboxgl-ctrl-geocoder {
-  min-width: 100%;
-}
-
-.suggestion-wrapper {
-  z-index: 5;
+#map {
+  height: 300px;
+  width: 300px;
 }

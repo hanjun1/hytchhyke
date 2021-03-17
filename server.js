@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 let session = require("express-session");
 let passport = require("passport");
+const MongoDBStore = require("connect-mongodb-session")(session);
 var logger = require("morgan");
 let methodOverride = require("method-override");
 require("dotenv").config();
@@ -28,6 +29,11 @@ app.use(
     secret: "hytchhikerocks!!",
     resave: false,
     saveUninitialized: true,
+    store: MongoDBStore({
+      collection: "sessions",
+      uri: process.env.DATABASE_URL,
+      databaseName: "myFirstDatabase",
+    }),
   })
 );
 app.use(passport.initialize());

@@ -5,18 +5,28 @@ module.exports = {
   showDriverTrips,
   showPassengerTrips,
   createRequest,
-  showRequests,
+  showReceivedRequests,
+  showSentRequests,
+  updateSentRequest,
+  updateReceivedRequest,
+  deletePassengerTrip,
+  deleteDriverTrip,
 };
 
 const Review = require("../models/review");
 const Trip = require("../models/trip");
 const Request = require("../models/request");
+const { TooManyRequests } = require("http-errors");
 
 async function index(req, res) {
-  await req.user.execPopulate("reviews");
-  res.render("users/index", {
-    user: req.user,
-  });
+  try {
+    await req.user.execPopulate("reviews");
+    res.render("users/index", {
+      user: req.user,
+    });
+  } catch (e) {
+    res.render("error", { message: "There's an error!", error: e });
+  }
 }
 
 function newTrip(req, res) {
@@ -40,7 +50,7 @@ async function create(req, res) {
     });
     res.redirect(`/users/${req.params.id}`);
   } catch (e) {
-    res.render("error", { message: "error", e });
+    res.render("error", { message: "There's an error!", error: e });
   }
 }
 
@@ -48,7 +58,7 @@ async function showDriverTrips(req, res) {
   try {
     let trips = await Trip.find({
       driver: req.params.id,
-    });
+    }).populate("driver");
     trips.sort((a, b) => {
       return b.time.localeCompare(a.time);
     });
@@ -58,7 +68,7 @@ async function showDriverTrips(req, res) {
       title: "driver",
     });
   } catch (e) {
-    res.render("error", { message: "error", e });
+    res.render("error", { message: "There's an error!", error: e });
   }
 }
 
@@ -66,8 +76,7 @@ async function showPassengerTrips(req, res) {
   try {
     let trips = await Trip.find({
       passenger: req.user.id,
-    });
-    console.log(trips);
+    }).populate("driver");
     trips.sort((a, b) => {
       return b.time.localeCompare(a.time);
     });
@@ -77,7 +86,7 @@ async function showPassengerTrips(req, res) {
       title: "passenger",
     });
   } catch (e) {
-    res.render("error", { message: "error", e });
+    res.render("error", { message: "There's an error!", error: e });
   }
 }
 
@@ -96,35 +105,105 @@ async function createRequest(req, res) {
       user: req.user,
     });
   } catch (e) {
-    res.render("error", { message: "error", e });
+    res.render("error", { message: "There's an error!", error: e });
   }
 }
 
-async function showRequests(req, res) {
+async function showReceivedRequests(req, res) {
   try {
     let requestsReceived = await Request.find({
       to: req.user.id,
     })
       .populate("trip")
-      .populate("to");
+      .populate("from");
+    // requestsReceived.sort((a, b) => {
+    //   return b.timestamp.localeCompare(a.timestamp);
+    // });
+    res.render("users/requests/index", {
+      sent: false,
+      requestsReceived,
+      user: req.user,
+    });
+  } catch (e) {
+    res.render("error", { message: "There's an error!", error: e });
+  }
+}
+
+async function showSentRequests(req, res) {
+  try {
     let requestsSent = await Request.find({
       from: req.user.id,
     })
       .populate("trip")
       .populate("to");
-    // requestsReceived.sort((a, b) => {
-    //   return b.timestamp.localeCompare(a.timestamp);
-    // });
     // requestsSent.sort((a, b) => {
     //   return b.timestamp.localeCompare(a.timestamp);
     // });
-    console.log(requestsSent);
     res.render("users/requests/index", {
-      requestsReceived,
+      sent: true,
       requestsSent,
       user: req.user,
     });
   } catch (e) {
-    res.render("error", { message: "error", e });
+    res.render("error", { message: "There's an error!", error: e });
+  }
+}
+
+async function updateReceivedRequest(req, res) {
+  try {
+    let request = await Request.findById(req.body.request)
+      .populate("trip")
+      .populate("from");
+    if (req.body.option === "accept") {
+      request.status = "Accepted";
+      request.trip.passenger.push(request.from);
+      request.trip.seats = request.trip.seats - 1;
+    } else {
+      request.status = "Declined";
+    }
+    await request.trip.save();
+    await request.save();
+    res.redirect(`/users/${req.params.id}/requests/received`);
+  } catch (e) {
+    res.render("error", { message: "There's an error!", error: e });
+  }
+}
+
+async function updateSentRequest(req, res) {
+  try {
+    let request = await Request.findById(req.body.request);
+    request.status = "Cancelled";
+    await request.save();
+    res.redirect(`/users/${req.params.id}/requests/sent`);
+  } catch (e) {
+    res.render("error", { message: "There's an error!", error: e });
+  }
+}
+
+async function deletePassengerTrip(req, res) {
+  try {
+    let trip = await Trip.findById(req.body.tripId).populate("passenger");
+    trip.seats -= 1;
+    console.log(req.user.id);
+    for (let i = 0; i < trip.passenger.length; i++) {
+      if (trip.passenger[i].id === req.user.id) {
+        console.log("hello");
+        trip.passenger.splice(i, 1);
+        break;
+      }
+    }
+    await trip.save();
+    res.redirect(`/users/${req.params.id}/passengertrips`);
+  } catch (e) {
+    res.render("error", { message: "There's an error!", error: e });
+  }
+}
+
+async function deleteDriverTrip(req, res) {
+  try {
+    await Trip.findByIdAndDelete(req.body.tripId);
+    res.redirect(`/users/${req.params.id}/drivertrips`);
+  } catch (e) {
+    res.render("error", { message: "There's an error!", error: e });
   }
 }

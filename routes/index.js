@@ -16,7 +16,7 @@ router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");
 });
-router.get("/:id", indexCtrl.show);
+router.get("/:id/", indexCtrl.show);
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })

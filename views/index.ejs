@@ -6,38 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHlfF4Zo27li1lFg-HSdaInVDSDda1ggI&libraries=places"></script>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Hitch</title>
+    <title>HytchHike</title>
   </head>
-  <nav>
-    <div class="logo"></div>
-    <li>
-      <% if (user) { %>
-      <a href="/users/<%= user.id %> ">Profile</a>
-      <a href="/logout">Log Out</a>
-      <% } else { %>
-      <a href="/auth/google">Login</a>
-      <% } %>
-    </li>
-  </nav>
+  <%- include('partial/navbar') %>
   <body>
+    <% if (first) { %> 
     <p>Hitch a ride...</p>
+    <% } else { %> 
+    <p>Search for another ride!</p>
+    <% } %> 
     <form action="/" method="GET">
-      <label for="start"
-        >From: <br />
-        <input type="text" name="start" class="start" /> </label
-      ><br />
-      <label for="end"
-        >To: <br />
-        <input type="text" name="end" class="end" /> </label
-      ><br />
-      <label for="date"
-        >Date: <br />
-        <input type="date" name="date" class="date" /> </label
-      ><br />
+      <label for="start">
+        From: <br />
+        <input type="text" name="start" class="start" />
+      </label>
+      <br />
+      <label for="end">
+        To: <br />
+        <input type="text" name="end" class="end" />
+      </label>
+      <br />
+      <label for="date">
+        Date: <br />
+        <input type="date" name="date" class="date" />
+      </label>
+      <br />
       <input type="hidden" name="startCity" class="start-city" />
       <input type="hidden" name="endCity" class="end-city" />
       <button type="button">Search</button>
     </form>
+    <% if (!first) { %> 
+    <div class="trips-container">
+      <% if (trips.length !== 0) { %> 
+        <% for (let trip of trips) { %>
+          <!-- Think about converting this to a table instead of a div-->
+          <div class="trip-container">
+            <p>Date: <%= trip.date %></p>
+            <p>Time: <%= trip.time %></p>
+            <p>Trip Details: <%= trip.start %> ---> <%= trip.end %></p>
+            <!-- <p><%= trip.startDistance %> -> <%= trip.middleDistance %> -> <%= trip.endDistance %></p> -->
+            <p>Cost: $<%= trip.price %></p>
+            <a href="/<%= trip.id %>">Trip Details</a>
+          </div>
+          <% } %> 
+      <% } else { %>
+        <p>There are no trips available</p>
+      <% } %>
+    </div>
+    <% } %> 
+    <%- include('partial/footer') %>
     <script src="javascripts/index.js"></script>
   </body>
 </html>

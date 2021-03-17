@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Profile</title>
+    <link rel="stylesheet" href="../../stylesheets/style.css" />
+    <title>HytchHike</title>
   </head>
   <body>
     <nav>
       <a href="/">Look For Trip</a>
+      <a href="/users/<%= user.id %>">Profile</a>
       <a href="/users/<%= user.id %>/new">Make a New Trip</a>
       <a href="/users/<%= user.id %>/drivertrips">View Driver Trips</a>
       <a href="/users/<%= user.id %>/passengertrips">View Passenger Trips</a>
-      <a href="/users/<%= user.id %>/requests">Requests</a>
+      <a href="/users/<%= user.id %>/requests/sent">Sent Requests</a>
+      <a href="/users/<%= user.id %>/requests/received">Received Requests</a>
       <a href="/logout">Logout</a>
     </nav>
   </body>

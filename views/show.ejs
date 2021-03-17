@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHlfF4Zo27li1lFg-HSdaInVDSDda1ggI&libraries=places"></script>
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <title>HytchHike</title>
+  </head>
+  <body>
+    <%- include('partial/navbar') %>
+    <p>Trip:</p>
+    <p><%= trip.startCity %> ---> <%= trip.endCity %></p>
+    <p>Date & Time: <%= trip.date %> <%= trip.time %></p>
+    <p>Driver Profile: <%= trip.driver.name %></p>
+    <p>Available Seats: <%= trip.seats %></p>
+    <p>Cost: $<%= trip.price %></p>
+    <p>Pick Up Location:</p>
+    <div id="map"></div>
+    <% if (user && request.length == 0) { %>
+    <div class="request-form">
+      <form action="/users/<%= user.id %>/requests" method="POST">
+        <input type="hidden" name="trip" value="<%= trip.id %>" />
+        <input type="hidden" name="from" value="<%= user.id %>" />
+        <input type="hidden" name="to" value="<%= trip.driver.id %>" />
+        <input type="hidden" name="status" value="Pending" />
+        <input type="hidden" name="read" value="false" />
+        <textarea name="text" cols="30" rows="10"></textarea><br />
+        <button>Send Request</button>
+      </form>
+    </div>
+    <% } else if (user && user.id === trip.driver.id) { %>
+      <p></p>
+    <% } else if (user && request.length > 0) { %>
+    <p>You have already sent a request.</p>
+    <% } else { %>
+    <p>Login to send a request.</p>
+    <% } %>
+    <div class="hidden">
+      <p id="search-start"><%= searchStart %></p>
+      <p id="search-end"><%= searchEnd %></p>
+      <p id="start"><%= trip.start %></p>
+      <p id="end"><%= trip.end %></p>
+    </div>
+    <%- include('partial/footer') %>
+    <script src="../javascripts/show.js"></script>
+  </body>
+</html>
