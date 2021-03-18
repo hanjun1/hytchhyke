@@ -1,5 +1,5 @@
 module.exports = {
-  index,
+  // index,
   new: newTrip,
   create,
   showDriverTrips,
@@ -18,16 +18,16 @@ const Trip = require("../models/trip");
 const Request = require("../models/request");
 const { TooManyRequests } = require("http-errors");
 
-async function index(req, res) {
-  try {
-    await req.user.execPopulate("reviews");
-    res.render("users/index", {
-      user: req.user,
-    });
-  } catch (e) {
-    res.render("error", { message: "There's an error!", error: e });
-  }
-}
+// async function index(req, res) {
+//   try {
+//     await req.user.execPopulate("reviews");
+//     res.render("users/index", {
+//       user: req.user,
+//     });
+//   } catch (e) {
+//     res.render("error", { message: "There's an error!", error: e });
+//   }
+// }
 
 function newTrip(req, res) {
   res.render("users/new", {

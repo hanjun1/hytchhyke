@@ -5,18 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
     <title>HytchHike</title>
   </head>
   <body>
-    <%- include('../../partial/navbar') %>
+    <%- include('../partial/navbar') %>
     <div class="sub-main">
-      <div class="request-message-container">
-        <p class="detail-message">Request has been succesfully sent to the driver.</p>
-        <a href="/"><button class="btn btn-primary request-button">Return to Search</button></a>
-      </div>
+      <h1>Hello <%= user.name %>,</h1>
     </div>
-    <script src="../../javascripts/navbar.js"></script>
-    <%- include('../../partial/footer') %>
+    <script src="../javascripts/navbar.js"></script>
+    <%- include('../partial/footer') %>
   </body>
 </html>

@@ -5,32 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHlfF4Zo27li1lFg-HSdaInVDSDda1ggI&libraries=places"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../stylesheets/style.css">
     <title>New Ride</title>
   </head>
   <body>
     <%- include('../partial/navbar') %>
-    <form action="/users/<%= user.id %>" method="POST">
-      <label for="date">Date: <input type="date" name="date" /> </label><br />
-      <label for="time">Time: <input type="time" name="time" /> </label><br />
-      <label for="price"
-        >Price:
-        <input type="number" step="0.01" min="0.00" name="price" /> </label
-      ><br />
-      <label for="seats"
-        >Seats: <input type="number" step="1" min="0" name="seats" /> </label
-      ><br />
-      <label for="start"
-        >Start Location: <input id="start" type="text" name="start" /></label
-      ><br />
-      <label for="end"
-        >End Location: <input id="end" type="text" name="end" /></label
-      ><br />
-      <input type="hidden" name="startCity" id="startCity" />
-      <input type="hidden" name="endCity" id="endCity" />
-      <input type="hidden" name="driver" value="<%= user.id %>" />
-      <button type="button">Create New Trip</button>
-    </form>
-    <%- include('../partial/footer') %>
+    <div class="sub-main">
+      <form action="/users/<%= user.id %>" method="POST">
+        <label for="date">Date: <input type="date" name="date" /> </label><br />
+        <label for="time">Time: <input type="time" name="time" /> </label><br />
+        <label for="price"
+          >Price:
+          <input type="number" step="0.01" min="0.00" name="price" /> </label
+        ><br />
+        <label for="seats"
+          >Seats: <input type="number" step="1" min="0" name="seats" /> </label
+        ><br />
+        <label for="start"
+          >Start Location: <input id="start" type="text" name="start" /></label
+        ><br />
+        <label for="end"
+          >End Location: <input id="end" type="text" name="end" /></label
+        ><br />
+        <input type="hidden" name="startCity" id="startCity" />
+        <input type="hidden" name="endCity" id="endCity" />
+        <input type="hidden" name="driver" value="<%= user.id %>" />
+        <button type="button">Create New Trip</button>
+      </form>
+    </div>
+    <script src="../../javascripts/navbar.js"></script>
     <script src="../../javascripts/script.js"></script>
+    <%- include('../partial/footer') %>
   </body>
 </html>
