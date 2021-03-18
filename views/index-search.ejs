@@ -5,50 +5,80 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHlfF4Zo27li1lFg-HSdaInVDSDda1ggI&libraries=places"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <title>HytchHike</title>
   </head>
   <%- include('partial/navbar') %>
   <body>
-    <p>Search for another ride!</p>
-    <form action="/" method="GET">
-      <label for="start">
-        From: <br />
-        <input type="text" name="start" class="start" />
-      </label>
-      <br />
-      <label for="end">
-        To: <br />
-        <input type="text" name="end" class="end" />
-      </label>
-      <br />
-      <label for="date">
-        Date: <br />
-        <input type="date" name="date" class="date" />
-      </label>
-      <br />
-      <input type="hidden" name="startCity" class="start-city" />
-      <input type="hidden" name="endCity" class="end-city" />
-      <button type="button">Search</button>
-    </form>
-    <div class="trips-container">
+    <div class="sub-main">
+    <div class="form-outside-container">
+      <form class="main-form" action="/" method="GET">
+        <div class="form-container">
+          <div class="input-group mb-2">
+            <span class="input-group-text">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              </svg>
+            </span><input type="text" class="start form-control" name="start" placeholder="From where?"/>
+          </div>        
+          <div class="input-group mb-2">
+            <span class="input-group-text">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              </svg>
+            </span><input type="text" class="end form-control" name="end" placeholder="To where?"/>
+          </div>
+          <div class="input-group mb-2">
+            <input type="date" name="date" class="date form-control" />
+          </div>
+          <input type="hidden" name="startCity" class="start-city" />
+          <input type="hidden" name="endCity" class="end-city" />
+          <div class="col-12">
+            <button type="button" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg></button>
+          </div>
+        </div>
+      </form>
+    </div>
       <% if (trips.length !== 0) { %> 
+      <p class="title">Search results for <%= date %>...</p>
+      <div class="trips-container">
         <% for (let trip of trips) { %>
           <!-- Think about converting this to a table instead of a div-->
           <div class="trip-container">
-            <p>Date: <%= trip.date %></p>
-            <p>Time: <%= trip.time %></p>
-            <p>Trip Details: <%= trip.start %> ---> <%= trip.end %></p>
-            <!-- <p><%= trip.startDistance %> -> <%= trip.middleDistance %> -> <%= trip.endDistance %></p> -->
-            <p>Cost: $<%= trip.price %></p>
-            <a href="/<%= trip.id %>">Trip Details</a>
+            <div class="row">
+              <div class="column">
+                <p class="result-time"><%= trip.time %></p>
+                <p class="result-label">from</p>
+                <p class="result-city"><%= trip.startCity %></p>
+                <p class="result-distance"><%= trip.startDistance %> away</p>
+              </div>
+              <div class="column">
+                <p class="result-time"><%= trip.arrivalTime %></p>
+                <p class="result-label">to</p>
+                <p class="result-city"><%= trip.endCity %></p>
+                <p class="result-distance"><%= trip.endDistance %> away</p>
+              </div>
+              <div class="column">
+                <p class="result-price">CA$<%= trip.price %></p>
+              </div>
+            </div>
+            <div class="row">
+            <a href="/<%= trip.id %>"><button class="btn btn-primary">Trip Details</button></a>
+            </div>
           </div>
           <% } %> 
+      </div>
       <% } else { %>
         <p>There are no trips available on this date.</p>
       <% } %>
-    </div>
+  </div>
     <%- include('partial/footer') %>
+    <script src="javascripts/navbar.js"></script>
     <script src="javascripts/index.js"></script>
   </body>
 </html>

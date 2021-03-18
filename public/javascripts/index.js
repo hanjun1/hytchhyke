@@ -21,7 +21,7 @@ const autocompleteEndLoc = new google.maps.places.Autocomplete(
 const startCityInput = document.querySelector(".start-city");
 const endCityInput = document.querySelector(".end-city");
 const searchForm = document.querySelector("form");
-const buttonEl = document.querySelector("button");
+const buttonEl = document.querySelector("form button");
 
 /*-- EVENT LISTENERS --*/
 startLocInput.addEventListener("change", resetStartLocation);

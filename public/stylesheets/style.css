@@ -8,8 +8,8 @@ footer {
   text-align: center;
   position: absolute;
   bottom: 0;
+  height: 100px;
   width: 100%;
-  height: 2.5rem;
 }
 
 #logo {
@@ -20,9 +20,14 @@ footer {
 }
 
 .navbar {
+  position: fixed;
   white-space: nowrap;
   overflow-x: hidden;
   height: 60px;
+  width: 100%;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
 }
 
 /* The sidebar menu */
@@ -70,14 +75,14 @@ footer {
   font-size: 20px;
   cursor: pointer;
   /* background-color: #111; */
-  color: black;
+  color: #1e96be;
   padding: 10px 15px;
   border: none;
 }
 
 .openbtn:hover,
 .searchbtn:hover {
-  background-color: #444;
+  background-color: #1e96be;
 }
 
 .link-container {
@@ -128,7 +133,7 @@ footer {
   position: sticky;
 }
 
-#main-slogan {
+.main-slogan {
   text-align: center;
   margin-bottom: 0px;
   font-size: 35px;
@@ -138,11 +143,112 @@ footer {
   padding-right: 20px;
 }
 
+.social-media {
+  margin: 10px;
+}
+
+.social-media a {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #1e96be;
+}
+
+.description-container {
+  padding: 30px;
+  padding-bottom: 0px;
+  white-space: normal;
+  text-align: center;
+  color: rgb(122, 122, 122);
+}
+
+.description-container .slogan {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.description-container .header {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.description p {
+  font-size: 14px;
+}
+
+.description svg {
+  color: #1e96be;
+}
+
+.trips-container {
+  overflow-x: auto;
+  white-space: normal;
+  margin: 20px;
+  padding: 20px;
+  /* border: 1px solid #1e96be; */
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
+.trips-container p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.trips-container button {
+  width: 100%;
+  background: #1e96be;
+  border-color: #1e96be;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.column {
+  width: 33.333%;
+}
+
+.result-time {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.result-price {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: right;
+  color: #1e96be;
+}
+
+.result-label {
+  font-size: 12px;
+}
+
+.result-city {
+  font-size: 18px;
+}
+
+.result-distance {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.title {
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left 0.5s; /* If you want a transition effect */
   white-space: nowrap;
   overflow-x: hidden;
+  margin-top: 60px;
+  height: 100%;
+  position: relative;
+  padding-bottom: 100px;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */

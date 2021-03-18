@@ -22,7 +22,7 @@ const tripSchema = new Schema({
   endCity: String,
   startDistance: String,
   endDistance: String,
-  middleDistance: String,
+  arrivalTime: String,
 });
 
 module.exports = mongoose.model("Trip", tripSchema);

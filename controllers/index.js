@@ -29,17 +29,21 @@ async function index(req, res) {
     trips.sort((a, b) => {
       return a.time.localeCompare(b.time);
     });
-    // for (let trip of trips) {
-    //   let distance;
-    //   distance = await calculateDistance(req.query.start, trip.start);
-    //   trip.startDistance = distance;
-    //   distance = await calculateDistance(trip.start, trip.end);
-    //   trip.middleDistance = distance;
-    //   distance = await calculateDistance(req.query.end, trip.end);
-    //   trip.endDistance = distance;
-    // }
+    for (let trip of trips) {
+      let distance;
+      distance = await calculateDistance(req.query.start, trip.start);
+      trip.startDistance = distance.distance.text;
+      distance = await calculateDistance(req.query.end, trip.end);
+      trip.endDistance = distance.distance.text;
+      distance = await calculateDistance(trip.start, trip.end);
+      let time = new Date(trip.date + " " + trip.time).getTime();
+      time = (time / 1000 + distance.duration.value) * 1000;
+      let newTime = new Date(time);
+      trip.arrivalTime = newTime.getHours() + ":" + newTime.getMinutes();
+    }
     res.render("index-search", {
       trips,
+      date: req.query.date,
       user: req.user,
       name: req.query.name,
       searchStart: req.query.start,
@@ -83,5 +87,5 @@ async function calculateDistance(searchStart, tripStart) {
       token
   );
   let result = await res.json();
-  return result.rows[0].elements[0].distance.text;
+  return result.rows[0].elements[0];
 }
