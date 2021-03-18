@@ -13,7 +13,7 @@
     <%- include('partial/navbar') %>
     <div class="sub-main">
       <div class="details-container">
-        <p class="details-title">Trip Details</p>
+        <h2 class="details-title">Trip Details</h2>
         <div class="detail-container">
           <p class="tab2 detail-header">Date & Time</p>
           <p class="tab8"><%= trip.date %>&emsp;<%= trip.time %></p>
@@ -58,7 +58,7 @@
             <div class="detail-container">
               <textarea class="form-control" name="text" cols="30" rows="4" placeholder="Enter a message you want to send to the driver with your request..."></textarea>
             </div>
-            <div class="detail-container">
+            <div class="detail-container detail-button-container">
               <button class="btn btn-primary">Send Request</button>
             </div>
           </form>

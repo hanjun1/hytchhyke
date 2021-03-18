@@ -14,7 +14,7 @@ let startLocInput = document.getElementById("start");
 let endLocInput = document.getElementById("end");
 let startCityInput = document.getElementById("startCity");
 let endCityInput = document.getElementById("endCity");
-let buttonEl = document.querySelector("button");
+let buttonEl = document.querySelector(".newtrip-button-container button");
 let newRideForm = document.querySelector("form");
 const autocompleteStartLoc = new google.maps.places.Autocomplete(
   startLocInput,
@@ -55,7 +55,6 @@ buttonEl.addEventListener("click", validateInputs);
 /*-- MAIN FUNCTIONS --*/
 
 function validateInputs() {
-  console.log(startLoc);
   if (
     startLoc.hasOwnProperty("place_id") &&
     endLoc.hasOwnProperty("place_id")

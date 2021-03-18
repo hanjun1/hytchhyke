@@ -2,7 +2,7 @@
 
 form {
   padding: 20px;
-  max-width: 420px;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -16,7 +16,7 @@ footer {
 }
 
 .sub-main {
-  max-width: 700px;
+  max-width: 768px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -102,6 +102,8 @@ footer {
 .link-container {
   position: absolute;
   top: 60px;
+  white-space: nowrap;
+  overflow-x: hidden;
 }
 
 .form-outside-container {
@@ -193,7 +195,7 @@ footer {
   color: #1e96be;
 }
 
-.trips-container {
+.trip-container {
   overflow-x: auto;
   white-space: normal;
   margin: 20px;
@@ -275,12 +277,13 @@ footer {
   margin-left: 30px;
 }
 
-.details-title {
-  margin-top: 30px;
+.details-title,
+.request-title {
+  margin-top: 80px;
   font-size: 35px;
   font-weight: bold;
   color: #1e96be;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .driver-profile {
@@ -301,13 +304,19 @@ footer {
 }
 
 .request-form-show button,
-.request-button {
+.request-button,
+.new-ride-form button,
+.request button,
+.request-message-container a {
   width: 100%;
+  max-width: 200px;
   background: #1e96be;
   border-color: #1e96be;
   border-radius: 10px;
   color: white;
   text-decoration: none;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .detail-message {
@@ -321,8 +330,11 @@ footer {
 
 #map {
   width: 100%;
+  max-width: 450px;
   height: 200px;
   border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .request-message-container {
@@ -331,6 +343,65 @@ footer {
   height: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.new-trip-container {
+  height: 70vh;
+  margin: 20px;
+}
+
+.new-trip-title {
+  font-size: 35px;
+  font-weight: bold;
+  color: #1e96be;
+  margin-bottom: 0px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.new-ride-form label {
+  margin: 0;
+}
+
+.new-ride-form div {
+  margin-bottom: 10px;
+}
+
+.request-text {
+  text-align: center;
+}
+
+.requests-container {
+  margin: 20px;
+  margin-top: 100px;
+}
+
+.request {
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.request p {
+  margin-bottom: 5px;
+}
+
+.request p span {
+  font-weight: bold;
+}
+
+.request-button,
+.newtrip-button-container,
+.detail-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.request-radio-inputs {
+  display: flex;
   justify-content: center;
 }
 

@@ -12,27 +12,45 @@
   <body>
     <%- include('../partial/navbar') %>
     <div class="sub-main">
-      <form action="/users/<%= user.id %>" method="POST">
-        <label for="date">Date: <input type="date" name="date" /> </label><br />
-        <label for="time">Time: <input type="time" name="time" /> </label><br />
-        <label for="price"
-          >Price:
-          <input type="number" step="0.01" min="0.00" name="price" /> </label
-        ><br />
-        <label for="seats"
-          >Seats: <input type="number" step="1" min="0" name="seats" /> </label
-        ><br />
-        <label for="start"
-          >Start Location: <input id="start" type="text" name="start" /></label
-        ><br />
-        <label for="end"
-          >End Location: <input id="end" type="text" name="end" /></label
-        ><br />
-        <input type="hidden" name="startCity" id="startCity" />
-        <input type="hidden" name="endCity" id="endCity" />
-        <input type="hidden" name="driver" value="<%= user.id %>" />
-        <button type="button">Create New Trip</button>
-      </form>
+      <div class="new-trip-container">
+        <p class="new-trip-title">Make a New Trip</p>
+        <form class="new-ride-form" action="/users/<%= user.id %>" method="POST">
+          <div>
+            <label for="date" class="form-label">Date</label> 
+            <input id="date" class="form-control" type="date" name="date" />
+          </div>
+          <div>
+            <label for="time" class="form-label">Time</label>
+            <input id="time" type="time" name="time" class="form-control" />
+          </div>
+          <div>
+            <label for="start" class="form-label">Starting Location</label>
+              <input id="start" type="text" name="start" class="form-control"/>
+          </div>
+          <div>
+            <label for="end" class="form-label">Ending Location</label>
+            <input id="end" type="text" name="end" class="form-control"/>
+          </div>    
+          <div>
+            <label for="price" class="form-label">Price per passenger</label>
+            <div class="input-group">
+              <span class="input-group-text">CAD$</span>
+              <input id="price" type="number" step="1" min="0" name="price" class="form-control"/>
+              <span class="input-group-text">.00</span>
+            </div>
+          </div>
+          <div>
+            <label for="seats" class="form-label">Available Seats</label>
+            <input id="seats" type="number" step="1" min="0" name="seats" class="form-control"/>
+          </div>    
+          <input type="hidden" name="startCity" id="startCity" />
+          <input type="hidden" name="endCity" id="endCity" />
+          <input type="hidden" name="driver" value="<%= user.id %>" />
+          <div class="newtrip-button-container">
+            <button type="button" class="btn btn-primary">Create New Trip</button>
+          </div>
+        </form>
+      </div>
     </div>
     <script src="../../javascripts/navbar.js"></script>
     <script src="../../javascripts/script.js"></script>

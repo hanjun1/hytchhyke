@@ -3,7 +3,7 @@ var router = express.Router();
 
 let usersCtrl = require("../controllers/users");
 
-// router.get("/:id", isLoggedIn, usersCtrl.index);
+router.get("/:id", isLoggedIn, usersCtrl.index);
 router.get("/:id/new", isLoggedIn, usersCtrl.new);
 router.get("/:id/drivertrips", isLoggedIn, usersCtrl.showDriverTrips);
 router.get("/:id/passengertrips", isLoggedIn, usersCtrl.showPassengerTrips);
