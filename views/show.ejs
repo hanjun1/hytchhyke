@@ -49,24 +49,24 @@
         <div class="detail-container">
           <div id="map"></div>
         </div>
-        <% if (user && request.length == 0) { %>
-        <div class="request-form-container">
-          <form class="request-form-show"action="/users/<%= user.id %>/requests" method="POST">
-            <input type="hidden" name="trip" value="<%= trip.id %>" />
-            <input type="hidden" name="from" value="<%= user.id %>" />
-            <input type="hidden" name="to" value="<%= trip.driver.id %>" />
-            <input type="hidden" name="status" value="Pending" />
-            <input type="hidden" name="read" value="false" />
-            <div class="detail-container">
-              <textarea class="form-control" name="text" cols="30" rows="4" placeholder="Enter a message you want to send to the driver with your request..."></textarea>
-            </div>
-            <div class="detail-container detail-button-container">
-              <button class="btn btn-primary">Send Request</button>
-            </div>
-          </form>
-        </div>
-        <% } else if (user && user.id === trip.driver.id) { %>
+        <% if (user && user.id === trip.driver.id) { %>
         <p></p>
+        <% } else if (user && request.length == 0) { %>
+          <div class="request-form-container">
+            <form class="request-form-show"action="/users/<%= user.id %>/requests" method="POST">
+              <input type="hidden" name="trip" value="<%= trip.id %>" />
+              <input type="hidden" name="from" value="<%= user.id %>" />
+              <input type="hidden" name="to" value="<%= trip.driver.id %>" />
+              <input type="hidden" name="status" value="Pending" />
+              <input type="hidden" name="read" value="false" />
+              <div class="detail-container">
+                <textarea class="form-control" name="text" cols="30" rows="4" placeholder="Enter a message you want to send to the driver with your request..."></textarea>
+              </div>
+              <div class="detail-container detail-button-container">
+                <button class="btn btn-primary">Send Request</button>
+              </div>
+            </form>
+          </div>
         <% } else if (user && request.length > 0) { %>
         <p class='detail-message'>You have already sent a request.</p>
         <% } else { %>
