@@ -114,7 +114,7 @@ td {
   overflow-x: hidden;
 }
 
-.main-form-index {
+.form-outside-container {
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -148,6 +148,9 @@ td {
 .search-container {
   margin-left: 20px;
   margin-right: 20px;
+}
+.search-container p {
+  text-align: center;
 }
 
 .main-form {
