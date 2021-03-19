@@ -114,6 +114,11 @@ td {
   overflow-x: hidden;
 }
 
+.main-form {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .form-container {
   border: 1px solid rgb(201, 201, 201);
   background: white;
@@ -122,8 +127,6 @@ td {
   white-space: nowrap;
   overflow-x: hidden;
   min-width: 300px;
-  /* margin-left: 20px;
-  margin-right: 20px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
