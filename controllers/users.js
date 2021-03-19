@@ -53,14 +53,14 @@ async function showDriverTrips(req, res) {
   try {
     let trips = await Trip.find({
       driver: req.params.id,
-    }).populate("driver");
+    }).populate("passenger");
     trips.sort((a, b) => {
       return b.time.localeCompare(a.time);
     });
     res.render("users/trips/index", {
       trips,
       user: req.user,
-      title: "driver",
+      title: "Driver",
     });
   } catch (e) {
     res.render("error", { message: "There's an error!", error: e });
@@ -78,7 +78,7 @@ async function showPassengerTrips(req, res) {
     res.render("users/trips/index", {
       trips,
       user: req.user,
-      title: "passenger",
+      title: "Passenger",
     });
   } catch (e) {
     res.render("error", { message: "There's an error!", error: e });

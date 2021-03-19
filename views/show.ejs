@@ -13,6 +13,7 @@
     <%- include('partial/navbar') %>
     <div class="sub-main">
       <div class="details-container">
+        <div class="details-sub-container">
         <h2 class="details-title">Trip Details</h2>
         <div class="detail-container">
           <p class="tab2 detail-header">Date & Time</p>
@@ -27,6 +28,7 @@
           <p class="tab8"><%= trip.end %></p>
         </div>
         <div class="detail-container">
+          <div class="detail-sub-container">
           <p class="tab2 detail-header">Driver</p>
           <div class="driver-profile tab8">
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -39,10 +41,10 @@
           </div>
         </div>
         <div class="detail-container">
-          <p class="tab2 detail-header">Available Seats: <%= trip.seats %></p>
+          <p class="tab2 detail-header">Available Seats: <span><%= trip.seats %></span></p>
         </div>
         <div class="detail-container">
-          <p class="tab2 detail-header">Cost: CAD$<%= trip.price %></p>
+          <p class="tab2 detail-header">Cost: <span>CAD$<%= trip.price %></span></p>
         </div>
         <div class="detail-container">
           <div id="map"></div>
@@ -76,6 +78,8 @@
           <p id="start"><%= trip.start %></p>
           <p id="end"><%= trip.end %></p>
         </div>
+      </div>
+      </div>
       </div>
     </div>
     <%- include('partial/footer') %>

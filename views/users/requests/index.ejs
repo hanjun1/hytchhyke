@@ -15,64 +15,104 @@
     <div class="requests-container">
     <h2 class="request-title">Received Requests</h2>
       <% if (requestsReceived.length > 0) { %> 
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <th scope="col">Received on</th>
+            <th scope="col">Passenger</th>
+            <th scope="col">Email</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Message Recieved</th>
+            <th scope="col">Status</th>
+            <th scope="col">Accept?</th>
+          </thead>
+          <tbody>
       <% requestsReceived.forEach((request)=> { %>
-      <div class="request">
-        <form action="/users/<%= user.id %>/requests/received?_method=PUT" method="POST">
-        <p><span>Request received on:</span>&ensp;<%= request.timestamp.getFullYear() %>-<%= request.timestamp.getMonth() %>-<%= request.timestamp.getDay() %>&ensp;<%= request.timestamp.getHours() %>:<%= request.timestamp.getMinutes() %></p>
-        <p><span>Passenger:</span>&ensp;<%= request.from.name %></p>
-        <p><span>Email:</span>&ensp;<%= request.from.email %></p>
-        <p><span>From:</span>&ensp;<%= request.trip.start %></p>
-        <p><span>To:</span>&ensp;<%= request.trip.end %></p>
-        <p><span>Message Sent:</span>&ensp;<%= request.text %></p>
-        <p><span>Status:</span>&ensp;<%= request.status %></p>
-        <% if (request.status === "Pending") { %>
-        <div class="request-button-container">
-            <input type="hidden" name="request" value="<%= request.id %>" />
-            <div class="request-radio-inputs">
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="option" value="accept" checked />
-                <label class="form-check-label" for="accept">Accept</label>
+          <tr>
+            <td><%= request.timestamp.getFullYear() %>-<%= request.timestamp.getMonth() %>-<%= request.timestamp.getDay() %>&ensp;<%= request.timestamp.getHours() %>:<%= request.timestamp.getMinutes() %></td>
+            <td><%= request.from.name %></td>
+            <td><%= request.from.email %></td>
+            <td><%= request.trip.startCity %></td>
+            <td><%= request.trip.endCity %></td>
+            <td><%= request.text %></td>
+            <td><%= request.status %></td>
+            <td>
+              <form action="/users/<%= user.id %>/requests/received?_method=PUT" method="POST">
+              <% if (request.status === "Pending") { %>
+              <div class="request-button-container">
+                  <input type="hidden" name="request" value="<%= request.id %>" />
+                  <div class="request-radio-inputs ">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="option" value="accept" checked />
+                      <label class="form-check-label" for="accept">Accept</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="option" value="decline" />
+                      <label class="form-check-label" for="decline">Decline</label>
+                    </div>
+                  </div>
+                  <div class="request-button">
+                    <button class="btn">Confirm</button>
+                  </div>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="option" value="decline" />
-                <label class="form-check-label" for="decline">Decline</label>
-              </div>
-            </div>
-            <div class="request-button">
-              <button class="btn btn-primary">Confirm</button>
-            </div>
-        </div>
-        <% } else { %>
-        <p></p>
-        <% } %>
-      </form>
-      </div>
-      <% }); %> <% } else { %>
+              <% } else { %>
+                <p></p>
+              <% } %>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+        </tbody>
+        </table>
+      </div> 
+      <% } else { %>
       <p class="request-text">There are no received requests.</p>
       <% } %>
     </div>
     <% } %> <% if (sent === true) { %>
     <div class="requests-container">
       <h2 class="request-title">Sent Requests</h2>
-      <% if (requestsSent.length > 0) { %> <% requestsSent.forEach((request) => { %>
-      <div class="request">
-        <form action="/users/<%= user.id %>/requests/sent?_method=PUT" method="POST">
-        <p><span>Request sent on:</span>&ensp;<%= request.timestamp.getFullYear() %>-<%= request.timestamp.getMonth() %>-<%= request.timestamp.getDay() %>&ensp;<%= request.timestamp.getHours() %>:<%= request.timestamp.getMinutes() %></p>
-        <p><span>Driver:</span>&ensp;<%= request.to.name %></p>
-        <p><span>Email:</span>&ensp;<%= request.to.email %></p>
-        <p><span>From:</span>&ensp;<%= request.trip.start %></p>
-        <p><span>To:</span>&ensp;<%= request.trip.end %></p>
-        <p><span>Message Sent:</span>&ensp;<%= request.text %></p>
-        <p><span>Status:</span>&ensp;<%= request.status %></p>
-        <% if (request.status === "Pending") { %>
-            <input type="hidden" name="request" value="<%= request.id %>" />
-            <div class="request-button">
-              <button class="btn btn-primary">Cancel</button>
-            </div>
-        <% } %> 
-        </form>
-      </div>
-      <% }); %> <% } else { %>
+      <% if (requestsSent.length > 0) { %> 
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <th scope="col">Sent on</th>
+              <th scope="col">Driver</th>
+              <th scope="col">Email</th>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col">Message Sent</th>
+              <th scope="col">Status</th>
+              <th scope="col">Cancel?</th>
+            </thead>
+            <tbody>
+      <% requestsSent.forEach((request) => { %>
+        <tr>
+          <td><%= request.timestamp.getFullYear() %>-<%= request.timestamp.getMonth() %>-<%= request.timestamp.getDay() %>&ensp;<%= request.timestamp.getHours() %>:<%= request.timestamp.getMinutes() %></td>
+          <td><%= request.to.name %></td>
+          <td><%= request.to.email %></td>
+          <td><%= request.trip.startCity %></td>
+          <td><%= request.trip.endCity %></td>
+          <td><%= request.text %></td>
+          <td><%= request.status %></td>
+          <td>
+            <form action="/users/<%= user.id %>/requests/sent?_method=PUT" method="POST">
+              <% if (request.status === "Pending") { %>
+                  <input type="hidden" name="request" value="<%= request.id %>" />
+                  <div class="request-button">
+                    <button class="btn">Cancel</button>
+                  </div>
+              <% } %> 
+              </form>
+          </td>
+        </tr>
+      <% }); %>
+        </tr>
+          </tbody>
+        </table>
+      </div> 
+      <% } else { %>
       <p class="request-text">There are no sent requests.</p>
       <% } %>
     </div>
