@@ -149,7 +149,7 @@ td {
   margin-left: 20px;
   margin-right: 20px;
 }
-.search-container p {
+.search-container .no-result-message {
   text-align: center;
 }
 
