@@ -87,6 +87,5 @@ async function calculateDistance(searchStart, tripStart) {
       token
   );
   let result = await res.json();
-  console.log(result);
   return result.rows[0].elements[0];
 }
