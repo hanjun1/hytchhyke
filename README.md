@@ -5,8 +5,8 @@ HytchHike is a ridesharing platform that offers individuals to share rides betwe
 ![Search Page](https://i.imgur.com/j0d8yIw.png)
 ![Ride Details Page](https://i.imgur.com/aQUBu2e.png)
 ![Make a Trip Page](https://i.imgur.com/hWKTVyM.png)
-![List of Rides Page](https://imgur.com/GPRqEPZ)
-![List of Passenger Trips](https://imgur.com/pY2UYSW)
+![List of Rides Page](https://i.imgur.com/GPRqEPZ.png)
+![List of Passenger Trips](https://i.imgur.com/pY2UYSW.png)
 ## Technologies Used
 * HTML/CSS/Bootstrap
 * JavaScript
