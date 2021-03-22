@@ -21,3 +21,4 @@ HytchHike is a ridesharing platform that offers individuals to share rides betwe
 * Make new ejs for passenger/driver trips to remove crowded tables
 * Add profiles and ratings for driver 
 * Add in-app messaging and in-app payment
+* Add notification when driver receives requests and when passenger's request is approved
